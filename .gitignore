@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+
+# Xcode - User
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# Xcode - Build
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# CocoaPods (使う場合)
+Pods/
+
+# Carthage (使う場合)
+Carthage/Build/
+
+# fastlane (使う場合)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# 環境変数・秘匿情報
+*.env
+.env.local
+GoogleService-Info.plist
