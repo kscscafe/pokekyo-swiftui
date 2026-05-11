@@ -3,6 +3,8 @@ import Foundation
 struct Sutra: Identifiable, Hashable {
     let id: String
     let title: String
+    let shortTitle: String
+    let reading: String?
     let pdfResource: String
     let audioResource: String
     let audioExt: String
@@ -12,6 +14,8 @@ extension Sutra {
     static let jigage = Sutra(
         id: "jigage",
         title: "妙法蓮華経 如来寿量品 第十六（自我偈）",
+        shortTitle: "自我偈",
+        reading: "じがげ",
         pdfResource: "500_05jigage",
         audioResource: "妙法蓮華経如来寿量品第十六（自我偈）",
         audioExt: "m4a"
@@ -28,7 +32,7 @@ enum SutraLanguage: Hashable {
     var displayName: String {
         switch self {
         case .japanese: "日本語版"
-        case .english: "English"
+        case .english: "English Edition"
         }
     }
 

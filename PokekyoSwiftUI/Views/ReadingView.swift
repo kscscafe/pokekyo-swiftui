@@ -3,17 +3,46 @@ import SwiftUI
 struct ReadingView: View {
     let sutra: Sutra
     @State private var audio = AudioPlayerModel()
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack(spacing: 0) {
+            customHeader
+            Divider()
             pdfArea
-            controlBar
+            Divider()
+            audioBar
         }
-        .navigationTitle(sutra.title)
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             audio.load(resource: sutra.audioResource, ext: sutra.audioExt)
         }
+    }
+
+    private var customHeader: some View {
+        HStack {
+            Button { dismiss() } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 13, weight: .semibold))
+                    .frame(width: 34, height: 34)
+                    .background(Color(.systemGray5))
+                    .clipShape(RoundedRectangle(cornerRadius: 7))
+            }
+            .buttonStyle(.plain)
+            Spacer()
+            Button {} label: {
+                Text("音声選択")
+                    .font(.system(size: 13))
+                    .padding(.horizontal, 12)
+                    .frame(height: 34)
+                    .background(Color(.systemGray5))
+                    .clipShape(RoundedRectangle(cornerRadius: 7))
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(Color(.systemGray6))
     }
 
     @ViewBuilder
@@ -29,8 +58,22 @@ struct ReadingView: View {
         }
     }
 
-    private var controlBar: some View {
-        VStack(spacing: 8) {
+    private var audioBar: some View {
+        HStack(spacing: 10) {
+            Button {
+                audio.togglePlay()
+            } label: {
+                Image(systemName: audio.isPlaying ? "pause.fill" : "play.fill")
+                    .font(.system(size: 22))
+                    .frame(width: 36, height: 36)
+            }
+            .buttonStyle(.plain)
+
+            Text(timeString(audio.currentTime))
+                .monospacedDigit()
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+
             Slider(
                 value: Binding(
                     get: { audio.currentTime },
@@ -39,26 +82,14 @@ struct ReadingView: View {
                 in: 0...max(audio.duration, 1)
             )
 
-            HStack {
-                Text(timeString(audio.currentTime))
-                    .monospacedDigit()
-                    .foregroundStyle(.secondary)
-                Spacer()
-                Button {
-                    audio.togglePlay()
-                } label: {
-                    Image(systemName: audio.isPlaying ? "stop.fill" : "play.fill")
-                        .font(.system(size: 40))
-                }
-                Spacer()
-                Text(timeString(audio.duration))
-                    .monospacedDigit()
-                    .foregroundStyle(.secondary)
-            }
+            Text(timeString(audio.duration))
+                .monospacedDigit()
+                .font(.footnote)
+                .foregroundStyle(.secondary)
         }
-        .padding(.horizontal)
-        .padding(.vertical, 12)
-        .background(.regularMaterial)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 14)
+        .background(Color(.systemBackground))
     }
 
     private func timeString(_ time: TimeInterval) -> String {
