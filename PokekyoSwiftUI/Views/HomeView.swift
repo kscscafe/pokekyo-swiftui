@@ -22,27 +22,10 @@ struct HomeView: View {
     }
 
     private var coverCard: some View {
-        ZStack {
-            Color.white
-            VStack(spacing: 20) {
-                Spacer().frame(height: 4)
-                verticalText("妙法蓮華経", fontSize: 40, weight: .bold)
-                Spacer()
-            }
-            // Inner thin border
-            Rectangle()
-                .stroke(Color.black, lineWidth: 1)
-                .padding(8)
-        }
-        .frame(width: 160, height: 400)
-        .overlay(Rectangle().stroke(Color.black, lineWidth: 5))
-    }
-
-    private func verticalText(_ string: String, fontSize: CGFloat, weight: Font.Weight) -> some View {
-        Text(string.map(String.init).joined(separator: "\n"))
-            .font(.system(size: fontSize, weight: weight, design: .serif))
-            .multilineTextAlignment(.center)
-            .lineSpacing(4)
+        Image("hyoushi_title")
+            .resizable()
+            .scaledToFit()
+            .frame(maxHeight: 420)
     }
 
     private var languageButtons: some View {
