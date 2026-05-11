@@ -38,3 +38,6 @@ fastlane/test_output
 *.env
 .env.local
 GoogleService-Info.plist
+
+# Claude Code ローカル作業ディレクトリ
+.claude/
