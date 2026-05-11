@@ -12,7 +12,7 @@ struct HomeView: View {
                 coverCard
                 Spacer()
                 languageButtons
-                    .padding(.horizontal, 48)
+                    .frame(maxWidth: 220)
                 versionLabel
                     .padding(.top, 20)
                     .padding(.bottom, 28)
@@ -61,9 +61,9 @@ private struct CoverButtonLabel: View {
 
     var body: some View {
         Text(text)
-            .font(.body)
+            .font(.subheadline)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 11)
+            .padding(.vertical, 7)
             .background(Color(.systemGray4))
             .foregroundStyle(active ? Color.primary : Color.secondary)
             .clipShape(RoundedRectangle(cornerRadius: 6))
